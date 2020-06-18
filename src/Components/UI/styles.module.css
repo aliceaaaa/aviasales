@@ -1,0 +1,38 @@
+.checkbox {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--colors-light);
+  cursor: pointer;
+}
+
+.checkbox:disabled {
+  cursor: default;
+}
+
+.control {
+  appearance: none;
+  height: 0px;
+  left: 0px;
+  opacity: 0px;
+  position: absolute;
+  top: 0px;
+  width: 0px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+.icon:hover {
+  border-color: var(--colors-blue);
+}
+
+.checkIcon {
+  display: flex;
+  border: 1px solid;
+  border-color: var(--colors-greyish);
+  border-radius: 4px;
+  width: 18px;
+  height: 18px;
+  justify-content: center;
+  align-items: center;
+}
