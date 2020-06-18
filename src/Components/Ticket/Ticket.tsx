@@ -2,7 +2,24 @@ import React, { Component } from "react";
 import styles from "./styles.module.css";
 
 export interface ITicketProps {
-  classes: typeof styles;
+  price: number;
+  carrier: string;
+  segments: [
+    {
+      origin: string;
+      destination: string;
+      date: string;
+      stops: string[];
+      duration: number;
+    },
+    {
+      origin: string;
+      destination: string;
+      date: string;
+      stops: string[];
+      duration: number;
+    }
+  ];
   onClick: () => void | Promise<void>;
 }
 

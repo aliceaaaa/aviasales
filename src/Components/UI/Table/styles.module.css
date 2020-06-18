@@ -1,0 +1,35 @@
+.tableContainer {
+  width: 462px;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.cell {
+  border: none;
+  width: 141px;
+  height: 21px;
+  color: var(--colors-dark);
+  background-color: var(--colors-light);
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.headCell {
+  width: 141px;
+  height: 18px;
+  box-sizing: border-box;
+  border: none;
+  color: var(--colors-greyish);
+  background-color: var(--colors-light);
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-align: left;
+}

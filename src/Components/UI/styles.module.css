@@ -22,10 +22,6 @@
   -webkit-appearance: none;
 }
 
-.icon:hover {
-  border-color: var(--colors-blue);
-}
-
 .checkIcon {
   display: flex;
   border: 1px solid;
@@ -35,4 +31,8 @@
   height: 18px;
   justify-content: center;
   align-items: center;
+}
+
+.checkIcon:hover {
+  border-color: var(--colors-blue);
 }
