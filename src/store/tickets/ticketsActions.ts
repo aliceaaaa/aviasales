@@ -1,35 +1,40 @@
 import { TAction, ITicketModel } from "../Models";
-import request from "../request";
 import { Dispatch } from "redux";
+import request from "../request";
 
 export const types = {
   setTickets: "tickets/SET_TICKETS",
-  setSearchId: "tickets/SET_SEARCH_ID",
 };
 
-export function onSetTicketsDataAction(tickets: Array<ITicketModel>): TAction {
+export function onSetTicketsSampleAction(
+  tickets: Array<ITicketModel>
+): TAction {
   return {
     type: types.setTickets,
     payload: tickets,
   };
 }
 
-export function onSetTicketsSearchIdAction(searchId: string): TAction {
-  console.log(searchId);
-  return {
-    type: types.setSearchId,
-    payload: searchId,
-  };
-}
+export function onGetTicketsSample() {
+  return async (dispatch: Dispatch) => {
+    let stop = false;
+    let ticketssample: Array<ITicketModel> = [];
 
-export function onGetSearchId() {
-  return (dispatch: Dispatch) => {
-    return request("https://front-test.beta.aviasales.ru/search").then(
-      (response) => {
-        console.log(response);
+    while (!stop) {
+      let searchIdResponse = await request(
+        "https://front-test.beta.aviasales.ru/search"
+      );
 
-        dispatch(onSetTicketsSearchIdAction(response.searchId));
+      let ticketsResponse = await request(
+        `https://front-test.beta.aviasales.ru/tickets?searchId=${searchIdResponse.searchId}`
+      );
+
+      if (ticketsResponse) {
+        ticketssample = ticketsResponse.tickets;
+        stop = ticketsResponse.stop;
+
+        dispatch(onSetTicketsSampleAction(ticketssample));
       }
-    );
+    }
   };
 }

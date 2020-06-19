@@ -1,13 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { IApplicationState } from "../store/IApplicationState";
+import { onGetTicketsSample } from "../store/tickets/ticketsActions";
+import { ITicketModel } from "../store/Models";
 import Checkbox from "../Components/UI/Checkbox";
 import Table from "../Components/UI/Table/Table";
-import { IApplicationState } from "../store/IApplicationState";
-import { onGetSearchId } from "../store/tickets/ticketsActions";
 
 export interface IAppProps {
   searchId: string;
-  onGetSearchId: () => void;
+  stop: boolean;
+  tickets: Array<ITicketModel>;
+  hasPollingStopped: boolean;
+  getTicketsSample: () => Promise<void>;
 }
 
 export interface IAppState {
@@ -24,12 +28,14 @@ class App extends Component<IAppProps, IAppState> {
   }
 
   componentDidMount() {
-    this.props.onGetSearchId();
+    const { getTicketsSample } = this.props;
+
+    getTicketsSample();
   }
 
   render() {
     const { isChecked } = this.state;
-    console.log(this.props);
+    const { tickets } = this.props;
     return (
       <div>
         <Checkbox
@@ -46,10 +52,12 @@ class App extends Component<IAppProps, IAppState> {
   }
 }
 
-const mapStateToProps = (state: IApplicationState) => state;
+const mapStateToProps = (state: IApplicationState) => ({
+  tickets: state.tickets.tickets,
+});
 
 const mapDispatchToProps = (dispatch: any) => ({
-  onGetSearchId: () => dispatch(onGetSearchId()),
+  getTicketsSample: () => dispatch(onGetTicketsSample()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
